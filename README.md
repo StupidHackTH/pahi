@@ -19,5 +19,9 @@ Add the Facebook chatbot "[Prahi Hackatom](https://www.facebook.com/prahi.hackat
 5. กี่บาท (How much)*
 6. ก้อนหินมีชีวิต (The living rock)*
 7. กบกระโดด (The jumping frog)*
-
 *\*Coming Soon!*
+
+## Develop by
+- Mumu Suthep Chanchuphol full time Dev(70%)
+- Jay tianwit moungnoycharoen nosleep Dev(30%) 
+- t4ng3nt Nattakit Sumreth asshold Dev && naplab co-nappingspace presenter(0%)
