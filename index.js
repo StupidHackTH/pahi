@@ -13,8 +13,11 @@ const ten =["นก","หมอน","หยก","ถนน","สยามพา�
 const twenty =["ยุง","ปู","นกยูง","รถบรรทุก","ขูดหวย","หนูนา","ถุง","ประตู","สูตรเลข","กระดูก"]
 const thirty =["ไก่","พ่อ","โปรแกรมเมอร์","บ้าน","เป็ด","น้ำ","ลาเต้","เรือดำน้ำ","รถถัง","คิมจองอึน"]
 const forety = ["ถุงผ้า","บิงซู","ฟองดูว์","น้ำพุ","ภูเก็ต","ขีปนาวุธ","ตุ๊กตุ๊ก","ลุงตู่","ตู้เย็น","ประดู่"]
+<<<<<<< HEAD
 const frog=[กบกระโดดข้ามรั้ว, กบกระโดด, กระโดด, กระโดดข้ามรั้ว]
 const sentence = [];
+=======
+>>>>>>> parent of a79ab9e... add frog game
 
 const usr = [];
 const usr_ingame = [];
@@ -95,7 +98,7 @@ login(credentials, (loginErr, api) => {
             usr_ingame[usr.indexOf(threadID)] = 1
             break;
 
-			      case 4:
+			case 4:
 						sendMessage(api, "ปลา 10 บาท หมู 20 บาท หมึก 30 บาท กุ้ง 40 บาท", threadID)
 						usr_tmp[usr.indexOf(threadID)] = mRnd(0,3)
 						switch(usr_tmp[usr.indexOf(threadID)]){
@@ -110,11 +113,15 @@ login(credentials, (loginErr, api) => {
 								break;
 							case 3:
 								msg = forety[mRnd(0,9)]
+<<<<<<< HEAD
                 break;
               case 5:
               for(var i=0;i<10;i++){
                 sentence.push(word[rand(0,3)]);
                 }
+=======
+								break;
+>>>>>>> parent of a79ab9e... add frog game
 						}
 						setTimeout(function(){sendMessage(api, msg + " กี่บาท???\n(ออกพิมพ์ _@_)", threadID)},1000)
 						usr_ingame[usr.indexOf(threadID)] = 1
@@ -183,15 +190,6 @@ login(credentials, (loginErr, api) => {
               setTimeout(function(){sendMessage(api, msg + "จอห์นนี่".repeat(mRnd(2,5)), threadID)},1000*2)
               setTimeout(function(){sendMessage(api, "จอห์นนี่ *ผิด* หรือ *ไม่ผิด*???\n(ออกพิมพ์ _@_)", threadID)},1000*3)
               usr_game[usr.indexOf(threadID)] = 3
-              break;
-              case "5":
-               sentence = [], whole = "", num=0;
-              for(var i=0;i<10;i++){
-              sentence.push(frog[rand(0,3)]);
-              }
-              sentence.shuffle();
-              whole = sentence.join("");
-              num = whole.split("กบ").length -1;
               break;
             default:
               sendMessage(api, "ลองใหม่นะ\n(ออกพิมพ์ _@_)", threadID)
@@ -334,6 +332,7 @@ login(credentials, (loginErr, api) => {
 												}else{
 								  sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ", threadID)
 								}
+<<<<<<< HEAD
                 break;
       case 5:
       if(messageRec.match(/^\d[ ]?(ตัว)?$/g)){
@@ -345,6 +344,10 @@ login(credentials, (loginErr, api) => {
                 }
 
 
+=======
+								break;
+						}
+>>>>>>> parent of a79ab9e... add frog game
 					}else if(messageRec.match(/^@$/g)){
 						sendMessage(api, "ออกจากเกมเรียบร้อยแล้วจ้า :)", threadID)
 						usr_ingame[usr.indexOf(threadID)] = 0
