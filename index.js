@@ -321,7 +321,7 @@ login(credentials, (loginErr, api) => {
 								}
 								break;
 						}
-						}
+					
 						
 					}else if(messageRec.match(/^@$/g)){
 						sendMessage(api, "ออกจากเกมเรียบร้อยแล้วจ้า :)", threadID)
