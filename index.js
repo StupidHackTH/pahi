@@ -9,6 +9,10 @@ const red = ["เสื้อ","ทรัมป์","กล่อง","กระ
 const white = ["กางเกง","เก้าอี้","นกเขา","กูเกิล","พิซซ่าฮาวายเอี้ยน","ซีเว่นอีเลเว่น","เฟสบุ๊ค","ทิชชู","ปลาหยุดจันทร์อังคาร","แนปแลบ"]
 const green = ["กรุงเทพมหานคร","กางเกงใน","ทวิตเตอร์","คอมพิวเตอร์","Stupid Hackathon","เอสเปรสโซ","ช็อกโกแลต","ปาทังกี้ปาทังก้า","คิมจองอึน","ถังขยะ"]
 const things = red.concat(white,green)
+const ten =["นก","หมอน","หยก","ถนน","สยามพารากอน","ยะลา","ขนมหวาน","จรวด","นมสด","บอนชอน"]
+const twenty =["ยุง","ปู","นกยูง","รถบรรทุก","ขูดหวย","หนูนา","ถุง","ประตู","สูตรเลข","กระดูก"]
+const thirty =["ไก่","พ่อ","โปรแกรมเมอร์","บ้าน","เป็ด","น้ำ","ลาเต้","เรือดำน้ำ","รถถัง","คิมจองอึน"]
+const forety["ถุงผ้า","บิงซู","ฟองดูว์","น้ำพุ","ภูเก็ต","ขีปนาวุธ","ตุ๊กตุ๊ก","ลุงตู่","ตู้เย็น","ประดู่"]
 
 const usr = [];
 const usr_ingame = [];
@@ -67,7 +71,7 @@ login(credentials, (loginErr, api) => {
 								msg = red[mRnd(0,9)]
 								break;
 							case 1:
-								msg = white[mRnd(0,9)]
+								msg =  white[mRnd(0,9)]
 								break;
 							case 2:
 								msg = green[mRnd(0,9)]
@@ -88,6 +92,27 @@ login(credentials, (loginErr, api) => {
             setTimeout(function(){sendMessage(api, "จอห์นนี่ *ผิด* หรือ *ไม่ผิด*???\n(ออกพิมพ์ @)", threadID)},1000*3)
             usr_ingame[usr.indexOf(threadID)] = 1
             break;
+			
+			case 4:
+						sendMessage(api, "ปลา 10 บาท หมู 20 บาท หมึก 30 บาท กุ้ง 40 บาท", threadID)
+						usr_tmp[usr.indexOf(threadID)] = mRnd(0,3)
+						switch(usr_tmp[usr.indexOf(threadID)]){
+							case 0:
+								msg = ten[mRnd(0,9)]
+								break;
+							case 1:
+								msg = twenty[mRnd(0,9)]
+								break;
+							case 2:
+								msg = thirty[mRnd(0,9)}
+								break;
+							case 3:
+								msg = forety[mRnd(0,9)]
+								break;
+						}
+						setTimeout(function(){sendMessage(api, msg + " กี่บาท???\n(ออกพิมพ์ @)", threadID)},1000)
+						usr_ingame[usr.indexOf(threadID)] = 1
+						break;
         }
       }else{
         sendMessage(api, "*ยินดีต้อนรับเข้าสู่บอทเกมปาหี่*\nพิมพ์ _@game_ เพื่อเริ่มเล่น\n_dev by mumu.universe_ <3", threadID)
@@ -173,6 +198,51 @@ login(credentials, (loginErr, api) => {
             sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ (ออกพิมพ์ @)", threadID)
           }
           break;
+		  case 4:
+					if(messageRec.match(/^((10)|(20)|(30)|(40))( บาท)?$/g)){
+						switch(usr_tmp[usr.indexOf(threadID)]){
+							case 0:
+													if(messageRec.match(/^10( บาท)?$/g)){
+									  sendMessage(api, "*ถูกต้องงงงง* <3\nเล่นอีกพิมพ์ _@game_ น้า", threadID)
+													usr_ingame[usr.indexOf(threadID)] = 0
+													}else{
+									  sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ", threadID)
+									}
+								break;
+							case 1:
+													if(messageRec.match(/^20( บาท)?$/g)){
+									  sendMessage(api, "*ถูกต้องงงงง* <3\nเล่นอีกพิมพ์ _@game_ น้า", threadID)
+													usr_ingame[usr.indexOf(threadID)] = 0
+													}ele{
+									  sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ", threadID)
+									}
+								break;
+							case 2:
+													if(messageRec.match(/^30( บาท)?$/g)){
+									  sendMessage(api, "*ถูกต้องงงงง* <3\nเล่นอีกพิมพ์ _@game_ น้า", threadID)
+													usr_ingame[usr.indexOf(threadID)] = 0
+													}else{
+									  sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ", threadID)
+									}
+								break;
+							case 3:
+												if(messageRec.match(/^40( บาท)?$/g)))){
+								  sendMessage(api, "*ถูกต้องงงงง* <3\nเล่นอีกพิมพ์ _@game_ น้า", threadID)
+												usr_ingame[usr.indexOf(threadID)] = 0
+												}else{
+								  sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ", threadID)
+								}
+								break;
+						}
+						}
+						
+					}else if(messageRec.match(/^@$/g)){
+						sendMessage(api, "ออกจากเกมเรียบร้อยแล้วจ้า :)", threadID)
+						usr_ingame[usr.indexOf(threadID)] = 0
+					}else{
+						sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ (ออกพิมพ์ @)", threadID)
+					}
+					break;
       }
     }
   })
