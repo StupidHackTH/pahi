@@ -13,11 +13,32 @@ const ten =["นก","หมอน","หยก","ถนน","สยามพา�
 const twenty =["ยุง","ปู","นกยูง","รถบรรทุก","ขูดหวย","หนูนา","ถุง","ประตู","สูตรเลข","กระดูก"]
 const thirty =["ไก่","พ่อ","โปรแกรมเมอร์","บ้าน","เป็ด","น้ำ","ลาเต้","เรือดำน้ำ","รถถัง","คิมจองอึน"]
 const forety = ["ถุงผ้า","บิงซู","ฟองดูว์","น้ำพุ","ภูเก็ต","ขีปนาวุธ","ตุ๊กตุ๊ก","ลุงตู่","ตู้เย็น","ประดู่"]
+var word = ['กบกระโดด','กบกระโดดข้ามรั้ว','กระโดด','กระโดดข้ามรั้ว']
 const shape = ["กลมๆ","เล็กๆ","เหลี่ยมๆ"]
+
 const usr = [];
 const usr_ingame = [];
 const usr_game = [];
 const usr_tmp = [];
+
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
 
 function mRnd(min=0,max=1){
   var n = Math.round(Math.random() * max) + min
@@ -43,7 +64,7 @@ login(credentials, (loginErr, api) => {
 		}
     if(usr_ingame[usr.indexOf(threadID)]==0){
       if(messageRec.match(/^(@game)|(๑เฟทำ)/g)){
-        usr_game[usr.indexOf(threadID)] = 6 // mRnd(0,4);
+        usr_game[usr.indexOf(threadID)] = mRnd(0,6);
         switch(usr_game[usr.indexOf(threadID)]){
           // --- BELL ---
           case 0:
@@ -119,7 +140,14 @@ login(credentials, (loginErr, api) => {
 						break;
             // --- FROG ---
             case 5:
-
+            var sentence = [], whole = "", num=0;
+            for(var i=0;i<mRnd(4,8);i++){
+            sentence.push(word[mRnd(0,3)]);
+            }
+            sentence = shuffle(sentence);
+            whole = sentence.join("");
+            usr_tmp[usr.indexOf(threadID)] = whole.split("กบ").length -1;
+            sendMessage(api, whole+" มีกบกี่ตัว???\n(ออกพิมพ์ _@_)", threadID)
               usr_ingame[usr.indexOf(threadID)] = 1
   						break;
             // --- ROCK ---
@@ -372,7 +400,22 @@ login(credentials, (loginErr, api) => {
 					break;
           // --- FROG ---
           case 5:
-
+          if(messageRec.match(/^\d$/g)){
+            if(messageRec == usr_tmp[usr.indexOf(threadID)]){
+              sendMessage(api, "*ถูกต้องงงงง* <3\nเล่นอีกพิมพ์ _@game_ น้า", threadID)
+              usr_ingame[usr.indexOf(threadID)] = 0
+            }else{
+              sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ", threadID)
+            }
+          }else if(messageRec.match(/^@$/g)){
+            sendMessage(api, "ออกจากเกมเรียบร้อยแล้วจ้า :)", threadID)
+            usr_ingame[usr.indexOf(threadID)] = 0
+          }else if(messageRec.match(/^\?$/g)){
+            sendMessage(api, "*เฉลย* " + usr_tmp[usr.indexOf(threadID)] + " ตัว :D\nเล่นอีกพิมพ์ _@game_ น้า", threadID)
+            usr_ingame[usr.indexOf(threadID)] = 0
+          }else{
+            sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ", threadID)
+          }
           break;
           // --- ROCK ---
           case 6:
