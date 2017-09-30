@@ -13,7 +13,7 @@ const ten =["นก","หมอน","หยก","ถนน","สยามพา�
 const twenty =["ยุง","ปู","นกยูง","รถบรรทุก","ขูดหวย","หนูนา","ถุง","ประตู","สูตรเลข","กระดูก"]
 const thirty =["ไก่","พ่อ","โปรแกรมเมอร์","บ้าน","เป็ด","น้ำ","ลาเต้","เรือดำน้ำ","รถถัง","คิมจองอึน"]
 const forety = ["ถุงผ้า","บิงซู","ฟองดูว์","น้ำพุ","ภูเก็ต","ขีปนาวุธ","ตุ๊กตุ๊ก","ลุงตู่","ตู้เย็น","ประดู่"]
-
+const shape = ["กลมๆ","เล็กๆ","เหลี่ยมๆ"]
 const usr = [];
 const usr_ingame = [];
 const usr_game = [];
@@ -43,7 +43,7 @@ login(credentials, (loginErr, api) => {
 		}
     if(usr_ingame[usr.indexOf(threadID)]==0){
       if(messageRec.match(/^(@game)|(๑เฟทำ)/g)){
-        usr_game[usr.indexOf(threadID)] = 4 // mRnd(0,4);
+        usr_game[usr.indexOf(threadID)] = 6 // mRnd(0,4);
         switch(usr_game[usr.indexOf(threadID)]){
           // --- BELL ---
           case 0:
@@ -117,14 +117,20 @@ login(credentials, (loginErr, api) => {
 						setTimeout(function(){sendMessage(api, msg + " กี่บาท???\n(ออกพิมพ์ _@_)", threadID)},1000)
 						usr_ingame[usr.indexOf(threadID)] = 1
 						break;
-            // --- ROCK ---
+            // --- FROG ---
             case 5:
 
               usr_ingame[usr.indexOf(threadID)] = 1
   						break;
-            // --- FROG ---
+            // --- ROCK ---
             case 6:
-
+            usr_tmp[usr.indexOf(threadID)] = mRnd(0,1)
+            var msg = ""
+            if(usr_tmp[usr.indexOf(threadID)] == 1){
+              msg = "มี"
+            }
+            msg += "ก้อนหินก้อนหนึ่ง"+shape[mRnd(0,2)]+" มีขา "+mRnd(0,4)+"ขา มีแขน "+mRnd(0,4)+"แขน มีหน้า "+mRnd(0,4)+"หน้า มีชิวิตหรือไม่มีชีวิต?"
+            sendMessage(api, msg, threadID)
               usr_ingame[usr.indexOf(threadID)] = 1
   						break;
         }
@@ -364,13 +370,32 @@ login(credentials, (loginErr, api) => {
 						sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ (ออกพิมพ์ _@_)", threadID)
 					}
 					break;
-          // --- ROCK ---
+          // --- FROG ---
           case 5:
 
           break;
-          // --- FROG ---
+          // --- ROCK ---
           case 6:
-
+            if(messageRec.match(/^((มี)|(ไม่มี))/g)){
+              if(usr_tmp[usr.indexOf(threadID)] == 1 && messageRec.match(/^มี/g)){
+                sendMessage(api, "*ถูกต้องงงงง* <3\nเล่นอีกพิมพ์ _@game_ น้า", threadID)
+                usr_ingame[usr.indexOf(threadID)] = 0
+              }else if (usr_tmp[usr.indexOf(threadID)] == 0 && messageRec.match(/^ไม่มี/g)) {
+                sendMessage(api, "*ถูกต้องงงงง* <3\nเล่นอีกพิมพ์ _@game_ น้า", threadID)
+                usr_ingame[usr.indexOf(threadID)] = 0
+              }else{
+                sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ (ยอมพิมพ์ ?)", threadID)
+              }
+            }else if(messageRec.match(/^@$/g)){
+              sendMessage(api, "ออกจากเกมเรียบร้อยแล้วจ้า :)", threadID)
+              usr_ingame[usr.indexOf(threadID)] = 0
+            }else if(messageRec.match(/^\?$/g)){
+              var msg = usr_tmp[usr.indexOf(threadID)] == 1? " มี ":" ไม่มี "
+              sendMessage(api, "*เฉลย*" + msg + ":D\nเล่นอีกพิมพ์ _@game_ น้า", threadID)
+              usr_ingame[usr.indexOf(threadID)] = 0
+            }else{
+              sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ (ยอมพิมพ์ ?)", threadID)
+            }
           break;
       }
     }
