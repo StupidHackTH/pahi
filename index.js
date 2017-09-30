@@ -14,7 +14,7 @@ const twenty =["ยุง","ปู","นกยูง","รถบรรทุก"
 const thirty =["ไก่","พ่อ","โปรแกรมเมอร์","บ้าน","เป็ด","น้ำ","ลาเต้","เรือดำน้ำ","รถถัง","คิมจองอึน"]
 const forety = ["ถุงผ้า","บิงซู","ฟองดูว์","น้ำพุ","ภูเก็ต","ขีปนาวุธ","ตุ๊กตุ๊ก","ลุงตู่","ตู้เย็น","ประดู่"]
 const frog=[กบกระโดดข้ามรั้ว, กบกระโดด, กระโดด, กระโดดข้ามรั้ว]
-const sentence = []; 
+const sentence = [];
 
 const usr = [];
 const usr_ingame = [];
@@ -111,7 +111,7 @@ login(credentials, (loginErr, api) => {
 							case 3:
 								msg = forety[mRnd(0,9)]
                 break;
-              case 5: 
+              case 5:
               for(var i=0;i<10;i++){
                 sentence.push(word[rand(0,3)]);
                 }
@@ -335,7 +335,7 @@ login(credentials, (loginErr, api) => {
 								  sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ", threadID)
 								}
                 break;
-      case 5: 
+      case 5:
       if(messageRec.match(/^\d[ ]?(ตัว)?$/g)){
         if(messageRec.match(/^num?(ตัว)$/g)){
           sendMessage(api, "*ถูกต้องงงงง* <3\nเล่นอีกพิมพ์ _@game_ น้า", threadID)
@@ -343,8 +343,8 @@ login(credentials, (loginErr, api) => {
                 }else{
           sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ", threadID)
                 }
-           
-						
+
+
 					}else if(messageRec.match(/^@$/g)){
 						sendMessage(api, "ออกจากเกมเรียบร้อยแล้วจ้า :)", threadID)
 						usr_ingame[usr.indexOf(threadID)] = 0
@@ -369,6 +369,6 @@ login(credentials, (loginErr, api) => {
 					}
 					break;
       }
-    }
-  })
+    }}
+  }})
 })
