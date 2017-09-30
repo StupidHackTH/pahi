@@ -39,7 +39,7 @@ login(credentials, (loginErr, api) => {
 		}
     if(usr_ingame[usr.indexOf(threadID)]==0){
       if(messageRec.match(/^@game/g)){
-        usr_game[usr.indexOf(threadID)] = mRnd(0,1);
+        usr_game[usr.indexOf(threadID)] = mRnd(0,2);
         switch(usr_game[usr.indexOf(threadID)]){
           case 0:
             usr_tmp[usr.indexOf(threadID)] = mRnd(0,3)
@@ -61,18 +61,19 @@ login(credentials, (loginErr, api) => {
 						setTimeout(function(){sendMessage(api, "กำแพงสีขาว", threadID)},750)
 						setTimeout(function(){sendMessage(api, "ศาลพระภูมิสีเขียว", threadID)},750*2)
 						usr_tmp[usr.indexOf(threadID)] = mRnd(0,2)
+            var msg = ""
 						switch(usr_tmp[usr.indexOf(threadID)]){
 							case 0:
-								const messageSend = red[mRnd(0,9)]
+								msg = red[mRnd(0,9)]
 								break;
 							case 1:
-								const messageSend = white[mRnd(0,9)]
+								msg = white[mRnd(0,9)]
 								break;
 							case 2:
-								const messageSend = green[mRnd(0,9)]
+								msg = green[mRnd(0,9)]
 								break;
 						}
-						setTimeout(function(){sendMessage(api, messageSend + " สีอะไร :D???", threadID)},750*3)
+						setTimeout(function(){sendMessage(api, msg + " สีอะไร :D???\n(ออกพิมพ์ @)", threadID)},750*3)
 						usr_ingame[usr.indexOf(threadID)] = 1
 						break;
         }
@@ -135,8 +136,6 @@ login(credentials, (loginErr, api) => {
                 }
 								break;
 						}
-						sendMessage(api, "*ถูกต้องงงงง* <3\nเล่นอีกพิมพ์ _@game_ น้า", threadID)
-						usr_ingame[usr.indexOf(threadID)] = 0
 					}else if(messageRec.match(/^@$/g)){
 						sendMessage(api, "ออกจากเกมเรียบร้อยแล้วจ้า :)", threadID)
 						usr_ingame[usr.indexOf(threadID)] = 0
@@ -146,5 +145,5 @@ login(credentials, (loginErr, api) => {
 					break;
       }
     }
-    })
+  })
 })
