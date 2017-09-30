@@ -45,12 +45,14 @@ login(credentials, (loginErr, api) => {
       if(messageRec.match(/^(@game)|(๑เฟทำ)/g)){
         usr_game[usr.indexOf(threadID)] = 4 // mRnd(0,4);
         switch(usr_game[usr.indexOf(threadID)]){
+          // --- BELL ---
           case 0:
             usr_tmp[usr.indexOf(threadID)] = mRnd(0,3)
             const messageSend = "กุ๊ง".repeat(mRnd(1,5)) + "ๆ".repeat(mRnd(1,5)) + "กิ๊ง".repeat(mRnd(1,5)) + "ๆ".repeat(mRnd(1,5)) + " " + bell[usr_tmp[usr.indexOf(threadID)]] + "\n(ออกพิมพ์ _@_)"
             sendMessage(api, messageSend, threadID)
             usr_ingame[usr.indexOf(threadID)] = 1
             break;
+          // --- WHAT NEXT ---
           case 1:
             sendMessage(api, "เริ่มจาก"+things[mRnd(0,29)], threadID)
             for(var i=0;i<mRnd(2,5);i++){
@@ -60,6 +62,7 @@ login(credentials, (loginErr, api) => {
             setTimeout(function(){sendMessage(api, "ต่อไปคืออะไร? (ออกพิมพ์ _@_)", threadID)},1000*(i+1))
             usr_ingame[usr.indexOf(threadID)] = 1
             break;
+          // --- RED HOUSE ---
 					case 2:
 						sendMessage(api, "บ้านสีแดง", threadID)
 						setTimeout(function(){sendMessage(api, "กำแพงสีขาว", threadID)},1000)
@@ -80,6 +83,7 @@ login(credentials, (loginErr, api) => {
 						setTimeout(function(){sendMessage(api, msg + " สีอะไร :D???\n(ออกพิมพ์ _@_)", threadID)},1000*3)
 						usr_ingame[usr.indexOf(threadID)] = 1
 						break;
+          // --- JOHNNY ---
           case 3:
             sendMessage(api, "จอห์นนี่เป็นคนอังกฤษ", threadID)
             setTimeout(function(){sendMessage(api, "จอห์นนี่ทำจอห์นนี่ผิด จอห์นนี่ไม่ทำจอห์นนี่ไม่ผิด", threadID)},1000)
@@ -92,7 +96,7 @@ login(credentials, (loginErr, api) => {
             setTimeout(function(){sendMessage(api, "จอห์นนี่ *ผิด* หรือ *ไม่ผิด*???\n(ออกพิมพ์ _@_)", threadID)},1000*3)
             usr_ingame[usr.indexOf(threadID)] = 1
             break;
-
+            // --- HOW MUCH ---
 			case 4:
 						sendMessage(api, "ปลา 10 บาท หมู 20 บาท หมึก 30 บาท กุ้ง 40 บาท", threadID)
 						usr_tmp[usr.indexOf(threadID)] = mRnd(0,3)
@@ -113,6 +117,16 @@ login(credentials, (loginErr, api) => {
 						setTimeout(function(){sendMessage(api, msg + " กี่บาท???\n(ออกพิมพ์ _@_)", threadID)},1000)
 						usr_ingame[usr.indexOf(threadID)] = 1
 						break;
+            // --- ROCK ---
+            case 5:
+
+              usr_ingame[usr.indexOf(threadID)] = 1
+  						break;
+            // --- FROG ---
+            case 6:
+
+              usr_ingame[usr.indexOf(threadID)] = 1
+  						break;
         }
       }else if(messageRec.match(/^@help$/g)){
         sendMessage(api, "*ช่วยเหลือ*\n- พิมพ์ _@game_ เพื่อเริ่มเล่น\n- พิมพ์ _@select_ เพื่อเลือกเกม\n- ขณะเล่นเกม พิมพ์ _@_ เพื่อออก\n- ขณะเล่นเกม พิมพ์ _?_ เพื่อดูเฉลย\n_dev by mumu.universe_ <3", threadID)
@@ -125,6 +139,7 @@ login(credentials, (loginErr, api) => {
       }
     }else{ // in playing
       switch(usr_game[usr.indexOf(threadID)]){
+        // --- MENU ---
         case -1:
           switch(messageRec){
             case "@":
@@ -182,6 +197,7 @@ login(credentials, (loginErr, api) => {
               sendMessage(api, "ลองใหม่นะ\n(ออกพิมพ์ _@_)", threadID)
           }
           break;
+        // --- BELL ---
         case 0:
           if(messageRec.match(/^\d$/g)){
             if(messageRec == usr_tmp[usr.indexOf(threadID)]+2){
@@ -201,6 +217,7 @@ login(credentials, (loginErr, api) => {
             sendMessage(api, "*ตอบเป็นตัวเลขน้า*\n(ออกพิมพ์ _@_)", threadID)
           }
           break;
+        // --- NEXT ---
         case 1:
           if(messageRec.match(/^ต่อไปคือ[ ]?.+/g)){
             sendMessage(api, "*ถูกต้องงงงง* <3\nเล่นอีกพิมพ์ _@game_ น้า", threadID)
@@ -215,6 +232,7 @@ login(credentials, (loginErr, api) => {
             sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ (ยอมพิมพ์ ?)", threadID)
           }
           break;
+        // --- RED HOUSE ---
 				case 2:
 					if(messageRec.match(/^(สี)?((แดง)|(ขาว)|(เขียว))$/g)){
 						switch(usr_tmp[usr.indexOf(threadID)]){
@@ -263,6 +281,7 @@ login(credentials, (loginErr, api) => {
 						sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ (ยอมพิมพ์ ?)", threadID)
 					}
 					break;
+        // --- JOHNNY ---
         case 3:
           if(messageRec.match(/^((ผิด)|(ไม่ผิด))$/g)){
             if(usr_tmp[usr.indexOf(threadID)] == 1 && messageRec.match(/^ผิด$/g)){
@@ -285,6 +304,7 @@ login(credentials, (loginErr, api) => {
             sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ (ยอมพิมพ์ ?)", threadID)
           }
           break;
+        // --- HOW MUCH ---
 		  case 4:
 					if(messageRec.match(/^((10)|(20)|(30)|(40))[ ]?(บาท)?$/g)){
 						switch(usr_tmp[usr.indexOf(threadID)]){
@@ -344,6 +364,14 @@ login(credentials, (loginErr, api) => {
 						sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ (ออกพิมพ์ _@_)", threadID)
 					}
 					break;
+          // --- ROCK ---
+          case 5:
+
+          break;
+          // --- FROG ---
+          case 6:
+
+          break;
       }
     }
   })
