@@ -39,7 +39,7 @@ login(credentials, (loginErr, api) => {
 		}
     if(usr_ingame[usr.indexOf(threadID)]==0){
       if(messageRec.match(/^@game/g)){
-        usr_game[usr.indexOf(threadID)] = mRnd(0,3);
+        usr_game[usr.indexOf(threadID)] = 3/* mRnd(0,3); */
         switch(usr_game[usr.indexOf(threadID)]){
           case 0:
             usr_tmp[usr.indexOf(threadID)] = mRnd(0,3)
