@@ -16,12 +16,11 @@ Add the Facebook chatbot "[Prahi Hackatom](https://www.facebook.com/prahi.hackat
 2. ต่อไปคือ... (The next one is...)
 3. บ้านสีแดง (A house is red)
 4. จอห์นนี่ (Johnny)
-5. กี่บาท (How much)*
-6. ก้อนหินมีชีวิต (The living rock)*
-7. กบกระโดด (The jumping frog)*
-*\*Coming Soon!*
+5. กี่บาท (How much)
+6. กบกระโดด (The jumping frog)
+7. หินมีชีวิต (The living rock)
 
 ## Develop by
-- Mumu Suthep Chanchuphol full time Dev(70%)
-- Jay tianwit moungnoycharoen nosleep Dev(30%) 
-- t4ng3nt Nattakit Sumreth asshold Dev && naplab co-nappingspace presenter(0%)
+- Mumú Suthep Chanchuphol
+- Jay Tianwit Moungnoycharoen
+- t4ng3nt Nattakit Sumreth
