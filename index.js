@@ -7,14 +7,16 @@ const credentials = {email: "prahi2017hackatom@gmail.com", password: "iamrobot"}
 const bell = ["กี่ลูก","มีกี่ลูก","ทั้งหมดกี่ลูก","มีกระดิ่งกี่ลูก"]
 const red = ["เสื้อ","ทรัมป์","กล่อง","กระดาษชำระ","ขวด","ป้าย","พัดลมไฟฟ้า","ลาบ","แก้ว","หมา"]
 const white = ["กางเกง","เก้าอี้","นกเขา","กูเกิล","พิซซ่าฮาวายเอี้ยน","ซีเว่นอีเลเว่น","เฟสบุ๊ค","ทิชชู","ปลาหยุดจันทร์อังคาร","แนปแลบ"]
-const green = ["กรุงเทพมหานคร","กางเกงใน","ทวิตเตอร์","คอมพิวเตอร์","Stupid Hackathon","เอสเปรสโซ","ช็อกโกแลต","ปาทังกี้ปาทังก้า","คิมจองอึน","ถังขยะ"]
-const things = red.concat(white,green)
+const green = ["กรุงเทพมหานคร","กางเกงใน","ทวิตเตอร์","คอมพิวเตอร์","Stupid Hackathon","เซ็นทรัลเวิลด์","ช็อกโกแลต","ปาทังกี้ปาทังก้า","คิมจองอึน","ถังขยะ"]
 const ten =["นก","หมอน","หยก","ถนน","สยามพารากอน","ยะลา","ขนมหวาน","จรวด","นมสด","บอนชอน"]
 const twenty =["ยุง","ปู","นกยูง","รถบรรทุก","ขูดหวย","หนูนา","ถุง","ประตู","สูตรเลข","กระดูก"]
 const thirty =["ไก่","พ่อ","โปรแกรมเมอร์","บ้าน","เป็ด","น้ำ","ลาเต้","เรือดำน้ำ","รถถัง","คิมจองอึน"]
 const forety = ["ถุงผ้า","บิงซู","ฟองดูว์","น้ำพุ","ภูเก็ต","ขีปนาวุธ","ตุ๊กตุ๊ก","ลุงตู่","ตู้เย็น","ประดู่"]
+const things = red.concat(white,green,ten,twenty,thirty,forety)
 var word = ['กบกระโดด','กบกระโดดข้ามรั้ว','กระโดด','กระโดดข้ามรั้ว']
 const shape = ["กลมๆ","เล็กๆ","เหลี่ยมๆ"]
+const frog = ["ดูนะ","ตอนเช้าตรู่","อ่านดีๆ นะ","มีกบโง่ๆ","กาลครั้งหนึ่งนานมากแล้ว","นี่!"]
+const nfrog = [2,3,4,4,7,1]
 
 const usr = [];
 const usr_ingame = [];
@@ -75,9 +77,9 @@ login(credentials, (loginErr, api) => {
             break;
           // --- WHAT NEXT ---
           case 1:
-            sendMessage(api, "เริ่มจาก"+things[mRnd(0,29)], threadID)
+            sendMessage(api, "เริ่มจาก"+things[mRnd(0,things.length-1)], threadID)
             for(var i=0;i<mRnd(2,5);i++){
-              const messageSend = "ต่อไปคือ "+things[mRnd(0,29)]
+              const messageSend = "ต่อไปคือ "+things[mRnd(0,things.length-1)]
               setTimeout(function(){sendMessage(api, messageSend, threadID)},1000*(i+1))
             }
             setTimeout(function(){sendMessage(api, "ต่อไปคืออะไร? (ออกพิมพ์ _@_)", threadID)},1000*(i+1))
@@ -141,23 +143,24 @@ login(credentials, (loginErr, api) => {
             // --- FROG ---
             case 5:
             var sentence = [], whole = "", num=0;
-            for(var i=0;i<mRnd(4,8);i++){
+            for(var i=0;i<mRnd(4,6);i++){
             sentence.push(word[mRnd(0,3)]);
             }
             sentence = shuffle(sentence);
             whole = sentence.join("");
-            usr_tmp[usr.indexOf(threadID)] = whole.split("กบ").length -1;
-            sendMessage(api, whole+" มีกบกี่ตัว???\n(ออกพิมพ์ _@_)", threadID)
+            usr_tmp[usr.indexOf(threadID)] = mRnd(0,5);
+            sendMessage(api, frog[usr_tmp[usr.indexOf(threadID)]]+" กบกระโดด"+whole+" มีกบกี่ตัว???\n(ออกพิมพ์ _@_)", threadID)
               usr_ingame[usr.indexOf(threadID)] = 1
   						break;
             // --- ROCK ---
             case 6:
+            default:
             usr_tmp[usr.indexOf(threadID)] = mRnd(0,1)
             var msg = ""
             if(usr_tmp[usr.indexOf(threadID)] == 1){
               msg = "มี"
             }
-            msg += "ก้อนหินก้อนหนึ่ง"+shape[mRnd(0,2)]+" มีขา "+mRnd(0,4)+"ขา มีแขน "+mRnd(0,4)+"แขน มีหน้า "+mRnd(0,4)+"หน้า มีชิวิตหรือไม่มีชีวิต?"
+            msg += "ก้อนหินก้อนหนึ่ง"+shape[mRnd(0,2)]+" มีขา "+mRnd(1,8)+" ขา มีแขน "+mRnd(1,8)+" แขน มีหน้า "+mRnd(1,8)+" หน้า มีชิวิตหรือไม่มีชีวิต?"
             sendMessage(api, msg, threadID)
               usr_ingame[usr.indexOf(threadID)] = 1
   						break;
@@ -165,7 +168,7 @@ login(credentials, (loginErr, api) => {
       }else if(messageRec.match(/^@help$/g)){
         sendMessage(api, "*ช่วยเหลือ*\n- พิมพ์ _@game_ เพื่อเริ่มเล่น\n- พิมพ์ _@select_ เพื่อเลือกเกม\n- ขณะเล่นเกม พิมพ์ _@_ เพื่อออก\n- ขณะเล่นเกม พิมพ์ _?_ เพื่อดูเฉลย\n_dev by mumu.universe_ <3", threadID)
       }else if(messageRec.match(/^@select$/g)){
-        sendMessage(api, "*เลือกเกมปาหี่*\n1. กรุ๊งกริ๊ง\n2. ต่อไปคือ...\n3. บ้านสีแดง\n4. จอห์นนี่\n5. กี่บาท\n(พิมพ์ _@_ เพื่อออก)", threadID)
+        sendMessage(api, "*เลือกเกมปาหี่*\n1. กรุ๊งกริ๊ง\n2. ต่อไปคือ...\n3. บ้านสีแดง\n4. จอห์นนี่\n5. กี่บาท\n6. กบกระโดด\n7. หินมีชีวิต\n(พิมพ์ _@_ เพื่อออก)", threadID)
         usr_game[usr.indexOf(threadID)] = -1
         usr_ingame[usr.indexOf(threadID)] = 1
       }else{
@@ -187,9 +190,9 @@ login(credentials, (loginErr, api) => {
               usr_game[usr.indexOf(threadID)] = 0
               break;
             case "2":
-              sendMessage(api, "เริ่มจาก"+things[mRnd(0,29)], threadID)
+              sendMessage(api, "เริ่มจาก"+things[mRnd(0,things.length-1)], threadID)
               for(var i=0;i<mRnd(2,5);i++){
-                const messageSend = "ต่อไปคือ "+things[mRnd(0,29)]
+                const messageSend = "ต่อไปคือ "+things[mRnd(0,things.length-1)]
                 setTimeout(function(){sendMessage(api, messageSend, threadID)},1000*(i+1))
               }
               setTimeout(function(){sendMessage(api, "ต่อไปคืออะไร? (ออกพิมพ์ _@_)", threadID)},1000*(i+1))
@@ -227,6 +230,47 @@ login(credentials, (loginErr, api) => {
               setTimeout(function(){sendMessage(api, "จอห์นนี่ *ผิด* หรือ *ไม่ผิด*???\n(ออกพิมพ์ _@_)", threadID)},1000*3)
               usr_game[usr.indexOf(threadID)] = 3
               break;
+            case "5":
+              sendMessage(api, "ปลา 10 บาท หมู 20 บาท หมึก 30 บาท กุ้ง 40 บาท", threadID)
+  						usr_tmp[usr.indexOf(threadID)] = mRnd(0,3)
+  						switch(usr_tmp[usr.indexOf(threadID)]){
+  							case 0:
+  								msg = ten[mRnd(0,9)]
+  								break;
+  							case 1:
+  								msg = twenty[mRnd(0,9)]
+  								break;
+  							case 2:
+  								msg = thirty[mRnd(0,9)]
+  								break;
+  							case 3:
+  								msg = forety[mRnd(0,9)]
+  								break;
+  						}
+  						setTimeout(function(){sendMessage(api, msg + " กี่บาท???\n(ออกพิมพ์ _@_)", threadID)},1000)
+              usr_game[usr.indexOf(threadID)] = 4
+              break;
+            case "6":
+              var sentence = [], whole = "", num=0;
+              for(var i=0;i<mRnd(4,8);i++){
+              sentence.push(word[mRnd(0,3)]);
+              }
+              sentence = shuffle(sentence);
+              whole = sentence.join("");
+              usr_tmp[usr.indexOf(threadID)] = mRnd(0,5);
+              sendMessage(api, frog[usr_tmp[usr.indexOf(threadID)]]+" กบกระโดด"+whole+" มีกบกี่ตัว???\n(ออกพิมพ์ _@_)", threadID)
+              usr_game[usr.indexOf(threadID)] = 5
+              break;
+            case "7":
+              usr_tmp[usr.indexOf(threadID)] = mRnd(0,1)
+              var msg = ""
+              if(usr_tmp[usr.indexOf(threadID)] == 1){
+                msg = "มี"
+              }
+              msg += "ก้อนหินก้อนหนึ่ง"+shape[mRnd(0,2)]+" มีขา "+mRnd(1,8)+" ขา มีแขน "+mRnd(1,8)+" แขน มีหน้า "+mRnd(1,8)+" หน้า มีชิวิตหรือไม่มีชีวิต?"
+              sendMessage(api, msg, threadID)
+              usr_game[usr.indexOf(threadID)] = 6
+              break;
             default:
               sendMessage(api, "ลองใหม่นะ\n(ออกพิมพ์ _@_)", threadID)
           }
@@ -238,7 +282,7 @@ login(credentials, (loginErr, api) => {
               sendMessage(api, "*ถูกต้องงงงง* <3\nเล่นอีกพิมพ์ _@game_ น้า", threadID)
 							usr_ingame[usr.indexOf(threadID)] = 0
             }else{
-              sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ (ยอมพิมพ์ ?)", threadID)
+              sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ (ยอมพิมพ์ _?_)", threadID)
             }
           }else if(messageRec.match(/^@$/g)){
             sendMessage(api, "ออกจากเกมเรียบร้อยแล้วจ้า :)", threadID)
@@ -248,7 +292,7 @@ login(credentials, (loginErr, api) => {
             sendMessage(api, "*เฉลย* " + soln + " ลูก :D\nเล่นอีกพิมพ์ _@game_ น้า", threadID)
             usr_ingame[usr.indexOf(threadID)] = 0
           }else{
-            sendMessage(api, "*ตอบเป็นตัวเลขน้า*\n(ออกพิมพ์ _@_)", threadID)
+            sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ (ออกพิมพ์ _@_)\n_(ตอบเป็นตัวเลข)_", threadID)
           }
           break;
         // --- NEXT ---
@@ -260,10 +304,10 @@ login(credentials, (loginErr, api) => {
             sendMessage(api, "ออกจากเกมเรียบร้อยแล้วจ้า :)", threadID)
             usr_ingame[usr.indexOf(threadID)] = 0
           }else if(messageRec.match(/^\?$/g)){
-            sendMessage(api, "*เฉลย* ต่อไปคือ " + things[mRnd(0,29)] + " :D\nเล่นอีกพิมพ์ _@game_ น้า", threadID)
+            sendMessage(api, "*เฉลย* ต่อไปคือ " + things[mRnd(0,things.length-1)] + " :D\nเล่นอีกพิมพ์ _@game_ น้า", threadID)
             usr_ingame[usr.indexOf(threadID)] = 0
           }else{
-            sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ (ยอมพิมพ์ ?)", threadID)
+            sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ (ยอมพิมพ์ _?_)\n_(ตอบเป็นข้อความ)_", threadID)
           }
           break;
         // --- RED HOUSE ---
@@ -275,7 +319,7 @@ login(credentials, (loginErr, api) => {
                   sendMessage(api, "*ถูกต้องงงงง* <3\nเล่นอีกพิมพ์ _@game_ น้า", threadID)
     							usr_ingame[usr.indexOf(threadID)] = 0
 								}else{
-                  sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ (ยอมพิมพ์ ?)", threadID)
+                  sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ (ยอมพิมพ์ _?_)", threadID)
                 }
 								break;
 							case 1:
@@ -283,7 +327,7 @@ login(credentials, (loginErr, api) => {
                   sendMessage(api, "*ถูกต้องงงงง* <3\nเล่นอีกพิมพ์ _@game_ น้า", threadID)
     							usr_ingame[usr.indexOf(threadID)] = 0
 								}else{
-                  sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ (ยอมพิมพ์ ?)", threadID)
+                  sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ (ยอมพิมพ์ _?_)", threadID)
                 }
 								break;
 							case 2:
@@ -291,7 +335,7 @@ login(credentials, (loginErr, api) => {
                   sendMessage(api, "*ถูกต้องงงงง* <3\nเล่นอีกพิมพ์ _@game_ น้า", threadID)
     							usr_ingame[usr.indexOf(threadID)] = 0
 								}else{
-                  sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ (ยอมพิมพ์ ?)", threadID)
+                  sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ (ยอมพิมพ์ _?_)", threadID)
                 }
 								break;
 						}
@@ -312,7 +356,7 @@ login(credentials, (loginErr, api) => {
 						}
             usr_ingame[usr.indexOf(threadID)] = 0
           }else{
-						sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ (ยอมพิมพ์ ?)", threadID)
+						sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ (ยอมพิมพ์ _?_)\n_(ตอบสีแดง/ขาว/เขียว)_", threadID)
 					}
 					break;
         // --- JOHNNY ---
@@ -325,7 +369,7 @@ login(credentials, (loginErr, api) => {
               sendMessage(api, "*ถูกต้องงงงง* <3\nเล่นอีกพิมพ์ _@game_ น้า", threadID)
               usr_ingame[usr.indexOf(threadID)] = 0
             }else{
-              sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ (ยอมพิมพ์ ?)", threadID)
+              sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ (ยอมพิมพ์ _?_)", threadID)
             }
           }else if(messageRec.match(/^@$/g)){
             sendMessage(api, "ออกจากเกมเรียบร้อยแล้วจ้า :)", threadID)
@@ -335,7 +379,7 @@ login(credentials, (loginErr, api) => {
             sendMessage(api, "*เฉลย* จอห์นนี่" + msg + ":D\nเล่นอีกพิมพ์ _@game_ น้า", threadID)
             usr_ingame[usr.indexOf(threadID)] = 0
           }else{
-            sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ (ยอมพิมพ์ ?)", threadID)
+            sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ (ยอมพิมพ์ _?_)\n_(ตอบว่า ผิด/ไม่ผิด)_", threadID)
           }
           break;
         // --- HOW MUCH ---
@@ -395,13 +439,13 @@ login(credentials, (loginErr, api) => {
 						}
 						usr_ingame[usr.indexOf(threadID)] = 0
 					}else{
-						sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ (ออกพิมพ์ _@_)", threadID)
+						sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ (ออกพิมพ์ _@_)\n_(ตอบเป็นตัวเลข)_", threadID)
 					}
 					break;
           // --- FROG ---
           case 5:
           if(messageRec.match(/^\d$/g)){
-            if(messageRec == usr_tmp[usr.indexOf(threadID)]){
+            if(messageRec == nfrog[usr_tmp[usr.indexOf(threadID)]]){
               sendMessage(api, "*ถูกต้องงงงง* <3\nเล่นอีกพิมพ์ _@game_ น้า", threadID)
               usr_ingame[usr.indexOf(threadID)] = 0
             }else{
@@ -411,10 +455,10 @@ login(credentials, (loginErr, api) => {
             sendMessage(api, "ออกจากเกมเรียบร้อยแล้วจ้า :)", threadID)
             usr_ingame[usr.indexOf(threadID)] = 0
           }else if(messageRec.match(/^\?$/g)){
-            sendMessage(api, "*เฉลย* " + usr_tmp[usr.indexOf(threadID)] + " ตัว :D\nเล่นอีกพิมพ์ _@game_ น้า", threadID)
+            sendMessage(api, "*เฉลย* " + nfrog[usr_tmp[usr.indexOf(threadID)]] + " ตัว :D\nเล่นอีกพิมพ์ _@game_ น้า", threadID)
             usr_ingame[usr.indexOf(threadID)] = 0
           }else{
-            sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ", threadID)
+            sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ\n_(ตอบเป็นตัวเลข)_", threadID)
           }
           break;
           // --- ROCK ---
@@ -427,7 +471,7 @@ login(credentials, (loginErr, api) => {
                 sendMessage(api, "*ถูกต้องงงงง* <3\nเล่นอีกพิมพ์ _@game_ น้า", threadID)
                 usr_ingame[usr.indexOf(threadID)] = 0
               }else{
-                sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ (ยอมพิมพ์ ?)", threadID)
+                sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ (ยอมพิมพ์ _?_)", threadID)
               }
             }else if(messageRec.match(/^@$/g)){
               sendMessage(api, "ออกจากเกมเรียบร้อยแล้วจ้า :)", threadID)
@@ -437,7 +481,7 @@ login(credentials, (loginErr, api) => {
               sendMessage(api, "*เฉลย*" + msg + ":D\nเล่นอีกพิมพ์ _@game_ น้า", threadID)
               usr_ingame[usr.indexOf(threadID)] = 0
             }else{
-              sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ (ยอมพิมพ์ ?)", threadID)
+              sendMessage(api, "*ผิดดด* :(\nลองใหม่นะ (ยอมพิมพ์ _?_)\n_(ตอบว่า มี/ไม่มี)_", threadID)
             }
           break;
       }
