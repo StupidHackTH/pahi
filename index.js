@@ -71,7 +71,7 @@ login(credentials, (loginErr, api) => {
           // --- BELL ---
           case 0:
             usr_tmp[usr.indexOf(threadID)] = mRnd(0,3)
-            const messageSend = "กุ๊ง".repeat(mRnd(1,5)) + "ๆ".repeat(mRnd(1,5)) + "กิ๊ง".repeat(mRnd(1,5)) + "ๆ".repeat(mRnd(1,5)) + " " + bell[usr_tmp[usr.indexOf(threadID)]] + "\n(ออกพิมพ์ _@_)"
+            const messageSend = "กรุ๊ง".repeat(mRnd(1,5)) + "ๆ".repeat(mRnd(1,5)) + "กริ๊ง".repeat(mRnd(1,5)) + "ๆ".repeat(mRnd(1,5)) + " " + bell[usr_tmp[usr.indexOf(threadID)]] + "\n(ออกพิมพ์ _@_)"
             sendMessage(api, messageSend, threadID)
             usr_ingame[usr.indexOf(threadID)] = 1
             break;
@@ -185,7 +185,7 @@ login(credentials, (loginErr, api) => {
               break;
             case "1":
               usr_tmp[usr.indexOf(threadID)] = mRnd(0,3)
-              const messageSend = "กุ๊ง".repeat(mRnd(1,5)) + "ๆ".repeat(mRnd(1,5)) + "กิ๊ง".repeat(mRnd(1,5)) + "ๆ".repeat(mRnd(1,5)) + " " + bell[usr_tmp[usr.indexOf(threadID)]] + "\n(ออกพิมพ์ _@_)"
+              const messageSend = "กรุ๊ง".repeat(mRnd(1,5)) + "ๆ".repeat(mRnd(1,5)) + "กริ๊ง".repeat(mRnd(1,5)) + "ๆ".repeat(mRnd(1,5)) + " " + bell[usr_tmp[usr.indexOf(threadID)]] + "\n(ออกพิมพ์ _@_)"
               sendMessage(api, messageSend, threadID)
               usr_game[usr.indexOf(threadID)] = 0
               break;
