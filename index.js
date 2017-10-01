@@ -1,9 +1,7 @@
 const login = require("facebook-chat-api")
-const credentials = {email: "prahi2017hackatom@gmail.com", password: "iamrobot"}
+// EDIT YOUR EMAIL & PWD HERE!
+const credentials = {email: "email@example.com", password: "password"}
 
-// var gamemode = 0; ---> usr_game[usr.indexOf(threadID)]
-// var question = 0; ---> usr_tmp[usr.indexOf(threadID)]
-// var iMode = 0; ---> usr_ingame[usr.indexOf(threadID)]
 const bell = ["กี่ลูก","มีกี่ลูก","ทั้งหมดกี่ลูก","มีกระดิ่งกี่ลูก"]
 const red = ["เสื้อ","ทรัมป์","กล่อง","กระดาษชำระ","ขวด","ป้าย","พัดลมไฟฟ้า","ลาบ","แก้ว","หมา"]
 const white = ["กางเกง","เก้าอี้","นกเขา","กูเกิล","พิซซ่าฮาวายเอี้ยน","ซีเว่นอีเลเว่น","เฟสบุ๊ค","ทิชชู","ปลาหยุดจันทร์อังคาร","แนปแลบ"]

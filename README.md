@@ -2,7 +2,8 @@
 Pahi games are ridiculous games which are very fun and addictive. The question may look hard as hell, yet the answer is easy as shit.
 
 ## How to play
-Add the Facebook chatbot "[Prahi Hackatom](https://www.facebook.com/prahi.hackatom.5)". As the bot accept your request, you can now play with the bot.
+~~Add the Facebook chatbot "[Prahi Hackatom]". As the bot accept your request, you can now play with the bot.~~
+Oh no! The bot is dead. We think that you have to download and try it for yourself.
 
 ## Commands
 - **@game** - play game randomly.
